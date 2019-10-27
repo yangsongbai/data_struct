@@ -11,6 +11,19 @@ public class Array<E> {
     this(10);
   }
 
+  public boolean isEmpty() {
+    if (size == 0) return true;
+    return false;
+  }
+
+  public E getFirst() {
+    return get(0);
+  }
+
+  public E getLast() {
+    return get(size - 1);
+  }
+
   E get(int index) {
     if (index < 0 || index > size) throw new IllegalArgumentException("数组越界");
     return data[index];
