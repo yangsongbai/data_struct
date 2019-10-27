@@ -10,7 +10,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>linkedlist</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>com.datastruct</groupId>
+            <artifactId>stack</artifactId>
+            <version>${version}</version>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <!-- define the project compile level -->
