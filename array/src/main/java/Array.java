@@ -42,6 +42,31 @@ public class Array {
     add(size, e);
   }
 
+  public int remove(int index) {
+    if (index < 0 || index > size) {
+      throw new IllegalArgumentException("越界");
+    }
+    int ret = data[index];
+    for (int i = index + 1; i < size; i++) {
+      data[i - 1] = data[i];
+    }
+    size--;
+    return ret;
+  }
+
+  public int removeFirst() {
+    return remove(0);
+  }
+
+  public int removeLast() {
+    return remove(size - 1);
+  }
+
+  public void removeElement(int e) {
+    int index = find(e);
+    if (index != -1) remove(index);
+  }
+
   public void add(int index, int e) {
     if (size == data.length) throw new IllegalArgumentException("添加失败，数组已满");
     if (index < 0 || index > size) {
