@@ -29,13 +29,57 @@ public class LinkedList<E> {
     Node pre = dummyHead;
     for (int i = 0; i < index; i++) {
       pre = pre.next;
-      pre.next = new Node(e, pre.next);
-      size++;
     }
+    pre.next = new Node(e, pre.next);
+    size++;
+  }
+
+  public E get(int index) {
+    if (index < 0 || index > size) throw new IllegalArgumentException("");
+    Node cur = dummyHead.next;
+    for (int i = 0; i < index; i++) {
+      cur = cur.next;
+    }
+    return cur.e;
+  }
+
+  public void set(int index, E e) {
+    if (index < 0 || index > size) throw new IllegalArgumentException("");
+    Node cur = dummyHead.next;
+    for (int i = 0; i < index; i++) {
+      cur = cur.next;
+    }
+    cur.e = e;
+  }
+
+  public E getFirst() {
+    return get(0);
+  }
+
+  public boolean contains(E e) {
+    Node cur = dummyHead.next;
+    while (cur != null) {
+      if (cur.e.equals(e)) return true;
+    }
+    return false;
+  }
+
+  public E getLast() {
+    return get(size);
   }
 
   public void addLast(E e) {
     add(size, e);
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (Node cur = dummyHead.next; cur != null; cur = cur.next) {
+      stringBuilder.append(cur.e).append(" -> ");
+    }
+    stringBuilder.append("NULL");
+    return stringBuilder.toString();
   }
 
   private class Node {
