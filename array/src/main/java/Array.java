@@ -53,7 +53,7 @@ public class Array<E> {
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("越界");
     }
-    if (size <= data.length / 4 && size / 2 != 0) {
+    if (size == data.length / 4 && data.length / 2 != 0) {
       resize(data.length / 2);
     }
     E ret = data[index];
