@@ -1,11 +1,11 @@
 package link;
 
 public class LinkedList<E> {
-  private Node head;
+  private Node dummyHead;
   private int size;
 
   public LinkedList() {
-    head = null;
+    dummyHead = new Node(null, null);
     size = 0;
   }
 
@@ -21,28 +21,21 @@ public class LinkedList<E> {
     /*  Node node = new Node(e);
     node.next = head;
     head = node;*/
-    head = new Node(e, head);
-    size++;
+    add(0, e);
   }
 
   public void add(int index, E e) {
     if (index < 0 || index > size) throw new IllegalArgumentException("");
-    if (index == 0) addFirst(e);
-    else {
-      Node pre = head;
-      for (int i = 0; i < index - 1; i++) {
-        pre = pre.next;
-        pre.next = new Node(e, pre.next);
-        size++;
-      }
+    Node pre = dummyHead;
+    for (int i = 0; i < index; i++) {
+      pre = pre.next;
+      pre.next = new Node(e, pre.next);
+      size++;
     }
-    head = new Node(e, head);
-    size++;
   }
 
   public void addLast(E e) {
-    head = new Node(e, head);
-    size++;
+    add(size, e);
   }
 
   private class Node {
