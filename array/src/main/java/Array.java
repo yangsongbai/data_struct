@@ -53,6 +53,9 @@ public class Array<E> {
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("越界");
     }
+    if (size <= data.length / 4 && size / 2 != 0) {
+      resize(data.length / 2);
+    }
     E ret = data[index];
     for (int i = index + 1; i < size; i++) {
       data[i - 1] = data[i];
@@ -76,15 +79,24 @@ public class Array<E> {
   }
 
   public void add(int index, E e) {
-    if (size == data.length) throw new IllegalArgumentException("添加失败，数组已满");
+
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("越界");
     }
+    if (size == data.length) resize(2 * data.length);
     for (int i = size - 1; i > index; i--) {
       data[i + 1] = data[i];
     }
     data[index] = e;
     size++;
+  }
+
+  private void resize(int newCapacity) {
+    E[] newData = (E[]) new Object[newCapacity];
+    for (int i = 0; i < size; i++) {
+      newData[i] = data[i];
+    }
+    data = newData;
   }
 
   @Override
