@@ -1,3 +1,5 @@
+package array;
+
 public class Array<E> {
   private E[] data;
   private int size;
@@ -24,7 +26,7 @@ public class Array<E> {
     return get(size - 1);
   }
 
-  E get(int index) {
+  public E get(int index) {
     if (index < 0 || index > size) throw new IllegalArgumentException("数组越界");
     return data[index];
   }

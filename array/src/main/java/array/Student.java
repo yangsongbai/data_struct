@@ -1,3 +1,5 @@
+package array;
+
 public class Student {
   String name;
   int age;
