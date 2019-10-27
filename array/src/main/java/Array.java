@@ -1,9 +1,9 @@
-public class Array {
-  private int[] data;
+public class Array<E> {
+  private E[] data;
   private int size;
 
   public Array(int capacity) {
-    data = new int[capacity];
+    data = (E[]) new Object[capacity];
     size = 0;
   }
 
@@ -11,7 +11,7 @@ public class Array {
     this(10);
   }
 
-  int get(int index) {
+  E get(int index) {
     if (index < 0 || index > size) throw new IllegalArgumentException("数组越界");
     return data[index];
   }
@@ -20,13 +20,20 @@ public class Array {
     return this.size;
   }
 
-  public boolean contains(int e) {
-    for (int i = 0; i < size; i++) if (e == data[i]) return true;
+  public boolean contains(E e) {
+    for (int i = 0; i < size; i++) if (data[i].equals(e)) return true;
     return false;
   }
 
-  public int find(int e) {
-    for (int i = 0; i < size; i++) if (e == data[i]) return i;
+  public void set(int index, E e) {
+    if (index < 0 || index > size) {
+      throw new IllegalArgumentException("越界");
+    }
+    data[index] = e;
+  }
+
+  public int find(E e) {
+    for (int i = 0; i < size; i++) if (data[i].equals(e)) return i;
     return -1;
   }
 
@@ -34,40 +41,41 @@ public class Array {
     return data.length;
   }
 
-  public void addFirst(int e) {
+  public void addFirst(E e) {
     add(0, e);
   }
 
-  public void addLast(int e) {
+  public void addLast(E e) {
     add(size, e);
   }
 
-  public int remove(int index) {
+  public E remove(int index) {
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("越界");
     }
-    int ret = data[index];
+    E ret = data[index];
     for (int i = index + 1; i < size; i++) {
       data[i - 1] = data[i];
     }
     size--;
+    data[size] = null;
     return ret;
   }
 
-  public int removeFirst() {
+  public E removeFirst() {
     return remove(0);
   }
 
-  public int removeLast() {
+  public E removeLast() {
     return remove(size - 1);
   }
 
-  public void removeElement(int e) {
+  public void removeElement(E e) {
     int index = find(e);
     if (index != -1) remove(index);
   }
 
-  public void add(int index, int e) {
+  public void add(int index, E e) {
     if (size == data.length) throw new IllegalArgumentException("添加失败，数组已满");
     if (index < 0 || index > size) {
       throw new IllegalArgumentException("越界");
